@@ -21,22 +21,26 @@ var addNotes = (title, body) => {
         title,
         body
     };
- 
+
     /* --instruction
         check if a note already exists?
         if yes; then return 'true'
         if not; save the note. and print the newly added note.
     */
 
-        /* --code
 
-            write your code here
+//start of mg code
+	//checking if note already exists
+	if (getNote(note)){
+		return true
+	}
 
-        */
+	notes.push(note);
+	logNote(note);
+//end of  my code
 
-    saveNote(notes)
-    return note;
-    
+	saveNote(notes)
+	return note;
 }
 
 var getAll = () => {
@@ -50,11 +54,19 @@ var getNote = (title) => {
         2. Filter notes get the one with title of argument
         3. Return the note if found it.
     */
-   
-    /* --Code--
-      write your code here
-    */
-  
+
+//start of mg code
+const notes = getAll();
+
+for (note of notes){
+        if (note.title == title)
+        return note;
+}
+// to be more specific; returning null in case, a matching not found.
+return null;
+
+//end of  my code
+
 };
 
 var removeNote = (title) => {
@@ -65,10 +77,19 @@ var removeNote = (title) => {
       */
     
 
-    /* --Code--
-      write your code here
-    */
-   
+//start of mg code
+const  matchingNote = getNote(title);
+
+if(matchingNote){
+	const  notes = getAll();
+	const  filteredNotes = notes.filter( note => note.title!=title )
+
+	saveNote(filteredNotes);
+}
+
+return matchingNote;
+
+//end of  my code
 };
 
 var logNote = (note) =>{
@@ -80,5 +101,7 @@ var logNote = (note) =>{
 module.exports = {
     addNotes,
     getAll,
-    logNote
+    logNote,
+    removeNote,
+    getNote
 }
